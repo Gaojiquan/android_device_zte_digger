@@ -1,0 +1,21 @@
+## Specify phone tech before including full_phone
+$(call inherit-product, vendor/cm/config/gsm.mk)
+
+# Release name
+PRODUCT_RELEASE_NAME := N5
+
+# Inherit some common CM stuff.
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+
+# Inherit device configuration
+$(call inherit-product, device/zte/N881F/device_N5.mk)
+
+## Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := N5
+PRODUCT_NAME := cm_N5
+PRODUCT_BRAND := zte
+PRODUCT_MODEL := N5
+PRODUCT_MANUFACTURER := zte
+
+#Set build fingerprint / ID / Prduct Name ect.
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=N5 TARGET_DEVICE=N881F BUILD_FINGERPRINT=ZTE/ZTE-N5/ZTE-N5:4.1.2/JZO54K/eng.root.20130126.130053:user/release-keys PRIVATE_BUILD_DESC="msm8960-user 4.1.2 JZO54K eng.root.20130126.130053 release-keys"
