@@ -1,2 +1,0 @@
-issue the command "ruby chinese_gen.rb width height pointsize" to generate the chinese font
-for example : ruby ruby chinese_gen.rb 10 18 18
