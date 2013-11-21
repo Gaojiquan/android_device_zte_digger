@@ -1,3 +1,87 @@
+DEVICE_PROVISIONED=1
+debug.sf.hw=1
+debug.egl.hw=1
+debug.composition.type=dyn
+dalvik.vm.heapsize=36m
+debug.enable.wl_log=1
+debug.mdpcomp.maxlayer=3
+debug.mdpcomp.logs=0
+
+
+ro.hdmi.enable=true
+lpa.decode=true
+lpa.use-stagefright=true
+
+persist.sys.strictmode.disable=1
+persist.sys.strictmode.visual=0
+
+qemu.hw.mainkeys=1
+
 #
-# system.prop for N5
+# system props for the data modules
 #
+ro.use_data_netmgrd=true
+persist.data_netmgrd_mtu=1454
+#system props for time-services
+persist.timed.enable=false
+
+#
+# system prop for opengles version
+#
+# 131072 is decimal for 0x20000 to report version 2
+ro.opengles.version=131072
+
+#
+# system property for Bluetooth Handsfree Profile version
+#
+ro.bluetooth.hfp.ver=1.6
+#
+#system prop for Bluetooth hci transport
+ro.qualcomm.bt.hci_transport=smd
+#
+# system prop for requesting Master role in incoming Bluetooth connection.
+#
+ro.bluetooth.request.master=true
+#
+# system prop for Bluetooth Auto connect for remote initated connections
+#
+ro.bluetooth.remote.autoconnect=true
+# system property for Bluetooth discoverability time out in seconds
+# 0: Always discoverable
+#debug.bt.discoverable_time=0
+
+#system prop for switching gps driver to qmi
+persist.gps.qmienabled=true
+
+# System property for cabl
+ro.qualcomm.cabl=1
+
+#
+# System prop for sending transmit power request to RIL during WiFi hotspot on/off
+#
+ro.ril.transmitpower=true
+rild.libpath=/system/lib/libril-qc-qmi-1.so
+rild.libargs=-d /dev/smd0
+ro.vendor.extension_library=/system/lib/libqc-opt.so 
+persist.rild.nitz_plmn=
+persist.rild.nitz_long_ons_0=
+persist.rild.nitz_long_ons_1=
+persist.rild.nitz_long_ons_2=
+persist.rild.nitz_long_ons_3=
+persist.rild.nitz_short_ons_0=
+persist.rild.nitz_short_ons_1=
+persist.rild.nitz_short_ons_2=
+persist.rild.nitz_short_ons_3=
+
+#snapdragon value add features
+ro.qc.sdk.audio.ssr=false
+##fluencetype can be "fluence" or "fluencepro" or "none"
+ro.qc.sdk.audio.fluencetype=none
+ro.qc.sdk.camera.facialproc=false
+ro.qc.sdk.sensors.gestures=false
+
+ro.streaming.ua.rtsp=stagefright/1.1 (Linux;Android
+ro.streaming.ua.http=stagefright/1.1 (Linux;Android
+ro.streaming.ua.prof=x-wap-profile:http://www.zte.com.cn/mobile/uaprof/ZTE N5.xml
+
+ril.ecclist=000,08,110,112,118,119,120,911,999

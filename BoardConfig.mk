@@ -1,25 +1,135 @@
-USE_CAMERA_STUB := true
+# WARNING: This line must come *before* including the proprietary
+# variant, so that it gets overwritten by the parent (which goes
+# against the traditional rules of inheritance).
+
+USE_CAMERA_STUB := false
 
 # inherit from the proprietary version
--include vendor/zte/N5/BoardConfigVendor.mk
+-include vendor/zte/digger/BoardConfigVendor.mk
+
+ARCH_ARM_HAVE_NEON := true
+TARGET_NO_BOOTLOADER := true
+TARGET_ARCH_VARIANT := armv7-a-neon
+
+# Platform
+TARGET_BOARD_PLATFORM := msm8960
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+
+# Architecture
+TARGET_CPU_SMP := true
+
+# Flags for Krait CPU && disable camera HAL id match check
+TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp -DDISABLE_HW_ID_MATCH_CHECK
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp -DDISABLE_HW_ID_MATCH_CHECK
+
+# Krait optimizations
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
+TARGET_USE_KRAIT_PLD_SET := true
+TARGET_KRAIT_BIONIC_PLDOFFS := 10
+TARGET_KRAIT_BIONIC_PLDTHRESH := 10
+TARGET_KRAIT_BIONIC_BBTHRESH := 64
+TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
 TARGET_ARCH := arm
-TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := unknown
-TARGET_CPU_ABI := armeabi
-TARGET_BOOTLOADER_BOARD_NAME := N5
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_BOOTLOADER_BOARD_NAME := digger
+TARGET_USERIMAGES_USE_EXT4 := true
 
+# Kernel
+TARGET_PREBUILT_KERNEL := device/zte/digger/kernel
+# TARGET_KERNEL_SOURCE := kernel/zte/digger
+# TARGET_KERNEL_CONFIG := cyanogenmod_digger_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3
 BOARD_KERNEL_BASE := 0x80200000
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 BOARD_KERNEL_PAGESIZE := 2048
+TARGET_SPECIFIC_HEADER_PATH := device/zte/digger/include
 
-# fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x105c0000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x105c0000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1572864000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_PREBUILT_KERNEL := device/zte/N5/kernel
+# Assert
+TARGET_OTA_ASSERT_DEVICE := digger
 
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+# chargers
+BOARD_CHARGER_RES := device/zte/digger/charger
+
+# Audio
+BOARD_USES_ALSA_AUDIO:= true
+BUILD_WITH_ALSA_UTILS := true
+TARGET_QCOM_AUDIO_VARIANT := caf
+TARGET_USES_QCOM_MM_AUDIO := true
+BOARD_AUDIO_CAF_LEGACY_INPUT_BUFFERSIZE := true
+BOARD_HAVE_LOW_LATENCY_AUDIO := true
+
+# Camera
+COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK
+
+# Recovery
+BOARD_CUSTOM_GRAPHICS := ../../../device/zte/digger/recovery/graphics.c
+TARGET_RECOVERY_INITRC := device/zte/digger/recovery/recovery.rc
+TARGET_RECOVERY_FSTAB := device/zte/digger/recovery/recovery.fstab
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
+BOARD_HAS_LARGE_FILESYSTEM := true
+
+# Vold
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 26
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_QCOM := true
+BLUETOOTH_HCI_USE_MCT := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/zte/digger/bluetooth
+
+# QCOM
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_QCOM_DISPLAY_VARIANT := caf
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP -DQCOM_COMPRESSED_AUDIO_ENABLED
+
+# Graphics
+BOARD_EGL_CFG := device/zte/digger/prebuilt/system/lib/egl/egl.cfg
+USE_OPENGL_RENDERER := true
+TARGET_USES_ION := true
+TARGET_USES_OVERLAY := true
+TARGET_USES_SF_BYPASS := true
+TARGET_USES_C2D_COMPOSITION := true
+
+# Enable WEBGL in WebKit
+ENABLE_WEBGL := true
+
+# Light
+TARGET_PROVIDES_LIBLIGHT := true
+
+# Camera DISABLE_HW_ID_MATCH_CHECK
+COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -DQCOM_BSP_CAMERA_ABI_HACK
+
+# GPS
+BOARD_HAVE_NEW_QC_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
+TARGET_NO_RPC := true
+
+# Wifi
+BOARD_HAS_QCOM_WLAN := true
+BOARD_WLAN_DEVICE := wlan0
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_FW_PATH_AP  := "ap"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME := "wlan"
+WIFI_EXT_MODULE_PATH := "/system/lib/modules/cfg80211.ko"
+WIFI_EXT_MODULE_NAME := "cfg80211"
+
+BOARD_USES_SECURE_SERVICES := true
+BOARD_USES_EXTRA_THERMAL_SENSOR := true

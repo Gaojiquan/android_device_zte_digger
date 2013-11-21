@@ -1,10 +1,56 @@
-# mount point	fstype    device    	[device2]
+# Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-/boot       emmc 		/dev/block/mmcblk0p8
-/cache      ext4      	/dev/block/mmcblk0p15
-/data       ext4      	/dev/block/mmcblk0p13
-/misc       emmc        /dev/block/mmcblk0p17
-/recovery   mtd         /dev/block/mmcblk0p16
-/sdcard 	vfat 		/dev/block/mmcblk1p1 /dev/block/mmcblk1
-/system     ext4 		/dev/block/mmcblk0p12
-/sdcard2 	vfat 		/dev/block/mmcblk0p20
+#wangqiaoming add for update 20121026 begin
+# mount point	   fstype		  device			            [device2]      [length=]
+/modem           vfat		 /dev/block/platform/msm_sdcc.1/by-name/modem
+/sbl1            emmc		 /dev/block/platform/msm_sdcc.1/by-name/sbl1
+/sbl2            emmc		 /dev/block/platform/msm_sdcc.1/by-name/sbl2
+/sbl3            emmc		 /dev/block/platform/msm_sdcc.1/by-name/sbl3
+/aboot           emmc		 /dev/block/platform/msm_sdcc.1/by-name/aboot
+/rpm             emmc		 /dev/block/platform/msm_sdcc.1/by-name/rpm
+/boot		         emmc		 /dev/block/platform/msm_sdcc.1/by-name/boot
+/tz              emmc		 /dev/block/platform/msm_sdcc.1/by-name/tz
+/pad             emmc		 /dev/block/platform/msm_sdcc.1/by-name/pad
+/modemst1        emmc		 /dev/block/platform/msm_sdcc.1/by-name/modemst1
+/modemst2        emmc		 /dev/block/platform/msm_sdcc.1/by-name/modemst2
+/system		       ext4		 /dev/block/platform/msm_sdcc.1/by-name/system
+/data        ext4		 /dev/block/platform/msm_sdcc.1/by-name/userdata
+/persist         ext4		 /dev/block/platform/msm_sdcc.1/by-name/persist
+/cache	         ext4		 /dev/block/platform/msm_sdcc.1/by-name/cache
+/misc		         emmc		 /dev/block/platform/msm_sdcc.1/by-name/misc
+/recovery	       emmc		 /dev/block/platform/msm_sdcc.1/by-name/recovery
+/m9kefs1         emmc		 /dev/block/platform/msm_sdcc.1/by-name/m9kefs1
+/m9kefs2         emmc		 /dev/block/platform/msm_sdcc.1/by-name/m9kefs2
+/m9kefs3         emmc		 /dev/block/platform/msm_sdcc.1/by-name/m9kefs3
+/DDR             emmc		 /dev/block/platform/msm_sdcc.1/by-name/DDR
+/m9kefsc         emmc		 /dev/block/platform/msm_sdcc.1/by-name/m9kefsc
+/factory         emmc		 /dev/block/platform/msm_sdcc.1/by-name/factory
+/splash          emmc		 /dev/block/platform/msm_sdcc.1/by-name/splash
+/sdcard		       vfat		 /dev/block/mmcblk1p1	                              /dev/block/mmcblk1
+/sdcard2		     vfat		 /dev/block/platform/msm_sdcc.1/by-name/grow
+#wangqiaoming add for update 20121026 end
